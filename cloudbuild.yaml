@@ -1,0 +1,10 @@
+steps:
+  - name:'pyhton'
+    entrypoint: 'pip'
+    args: ['install', '-r','requirements.txt']
+
+  - name:'python'
+    entrypoint:'python'
+    args:['-m', 'unittest', 'discover']
+
+  timeout: 300s
