@@ -4,8 +4,7 @@ steps:
     args:
       - '-c'
       - |
-        pip install -r requirements.txt
-        python -m unittest test_app.py
+        pip install -r requirements.txt && python -m unittest test_app.py
 
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'gcr.io/sit707-25t1-liyanage-c1d4737/myapp', '.']
@@ -24,4 +23,4 @@ steps:
     ]
 
 options:
-  logging: NONE
+  logging: NONE  # Keep this if log writing is blocked
