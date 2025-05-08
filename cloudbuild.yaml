@@ -1,10 +1,24 @@
 steps:
-  - name:'pyhton'
-    entrypoint: 'pip'
-    args: ['install', '-r','requirements.txt']
+  - name: 'python'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        pip install -r requirements.txt
+        python -m unittest test_app.py
 
-  - name:'python'
-    entrypoint:'python'
-    args:['-m', 'unittest', 'discover']
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/$sit707-25t1-liyanage-c1d4737/myapp', '.']
 
-  timeout: 300s
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$sit707-25t1-liyanage-c1d4737/myapp']
+
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'gcloud'
+    args: [
+      'run', 'deploy', 'myapp',
+      '--image', 'gcr.io/$sit707-25t1-liyanage-c1d4737/myapp',
+      '--platform=managed',
+      '--region=us-central1',
+      '--allow-unauthenticated'
+    ]
