@@ -1,5 +1,7 @@
 steps:
   - name: 'python'
+    options:
+    logging: CLOUD_LOGGING_ONLY
     entrypoint: 'bash'
     args:
       - '-c'
