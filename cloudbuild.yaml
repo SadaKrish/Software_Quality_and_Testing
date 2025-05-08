@@ -1,7 +1,5 @@
 steps:
   - name: 'python'
-    options:
-    logging: CLOUD_LOGGING_ONLY
     entrypoint: 'bash'
     args:
       - '-c'
@@ -10,17 +8,20 @@ steps:
         python -m unittest test_app.py
 
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/$sit707-25t1-liyanage-c1d4737/myapp', '.']
+    args: ['build', '-t', 'gcr.io/sit707-25t1-liyanage-c1d4737/myapp', '.']
 
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/$sit707-25t1-liyanage-c1d4737/myapp']
+    args: ['push', 'gcr.io/sit707-25t1-liyanage-c1d4737/myapp']
 
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: 'gcloud'
     args: [
       'run', 'deploy', 'myapp',
-      '--image', 'gcr.io/$sit707-25t1-liyanage-c1d4737/myapp',
+      '--image', 'gcr.io/sit707-25t1-liyanage-c1d4737/myapp',
       '--platform=managed',
       '--region=us-central1',
       '--allow-unauthenticated'
     ]
+
+options:
+  logging: CLOUD_LOGGING_ONLY
