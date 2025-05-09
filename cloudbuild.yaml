@@ -14,13 +14,12 @@ steps:
 
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: 'gcloud'
-    args: [
-      'run', 'deploy', 'myapp',
-      '--image', 'gcr.io/sit707-25t1-liyanage-c1d4737/myapp',
-      '--platform=managed',
-      '--region=us-central1',
-      '--allow-unauthenticated'
-    ]
-
-options:
-  logging: NONE  # Keep this if log writing is blocked
+    args:
+      - 'run'
+      - 'deploy'
+      - 'myapp'
+      - '--image'
+      - 'gcr.io/sit707-25t1-liyanage-c1d4737/myapp'
+      - '--platform=managed'
+      - '--region=us-central1'
+      - '--allow-unauthenticated'
