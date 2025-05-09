@@ -13,5 +13,10 @@ RUN pip install -r requirements.txt
 # Copy the application code into the container
 COPY . .
 
+# Set environment variables and expose port
+ENV PORT=8080
+EXPOSE 8080
+
 # Set the command to run your app
 CMD ["python", "app.py"]
+
